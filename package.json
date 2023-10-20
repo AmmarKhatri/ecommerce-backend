@@ -2,14 +2,21 @@
   "name": "ecommerce-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/index.ts",
   "scripts": {
+    "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "npm run compile && node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.0.1"
+    "@apollo/server": "^4.9.4",
+    "graphql": "^16.8.1"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.8.7",
+    "typescript": "^5.2.2"
   }
 }
