@@ -12,11 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.4",
-    "graphql": "^16.8.1"
+    "bcrypt": "^5.1.1",
+    "graphql": "^16.8.1",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3"
   },
   "type": "module",
   "devDependencies": {
     "@types/node": "^20.8.7",
+    "@types/pg": "^8.10.9",
     "typescript": "^5.2.2"
   }
 }

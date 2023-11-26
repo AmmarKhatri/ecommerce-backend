@@ -1,3 +1,5 @@
+import { loginUser } from './users/loginUser.js';
+import { registerUser } from './users/registerUser.js';
 const books = [
     {
         title: 'The Awakening',
@@ -10,6 +12,11 @@ const books = [
 ];
 export const resolvers = {
     Query: {
+        //sample query
         books: () => books,
     },
+    Mutation: {
+        registerUser,
+        loginUser
+    }
 };
