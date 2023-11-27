@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 export const generateToken = (id, email, role) => {
-    const secretKey = process.env.JWT_KEY;
-    //const secretKey = '0741fdcec7a6607b694aa44546b4eafd';
+    //const secretKey = process.env.JWT_KEY;
+    const secretKey = '0741fdcec7a6607b694aa44546b4eafd';
     // object payload
     const payload = {
         id,

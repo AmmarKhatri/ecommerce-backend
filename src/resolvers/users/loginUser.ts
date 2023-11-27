@@ -1,6 +1,4 @@
 import bcrypt from 'bcrypt';
-
-import { millisecondsToTimestamp } from '../../helpers/convertTimestamp.js';
 import { generateToken } from '../../helpers/generateToken.js';
 export const loginUser = async (_: any, { input }: any, context: any) => {
     const { email, password } = input;

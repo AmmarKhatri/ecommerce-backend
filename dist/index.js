@@ -5,20 +5,20 @@ import { resolvers } from './resolvers/resolvers.js';
 import pkg from 'pg';
 const { Pool } = pkg;
 // Create a PostgreSQL connection pool
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASS,
-    port: 5432, // Default PostgreSQL port
-});
 // const pool = new Pool({
-//   user: 'admin',
-//   host: 'localhost',
-//   database: 'postgres',
-//   password:'iba1234',
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database: process.env.DB_DATABASE,
+//   password: process.env.DB_PASS,
 //   port: 5432, // Default PostgreSQL port
 // });
+const pool = new Pool({
+    user: 'admin',
+    host: 'localhost',
+    database: 'postgres',
+    password: 'iba1234',
+    port: 5432, // Default PostgreSQL port  
+});
 let dbClient;
 // Handle application exit events
 process.on('beforeExit', () => {
@@ -52,6 +52,7 @@ try {
         async context({ req, res }) {
             return {
                 db: dbClient,
+                req
             };
         },
     });

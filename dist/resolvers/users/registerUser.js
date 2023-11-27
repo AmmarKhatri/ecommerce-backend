@@ -3,6 +3,7 @@ import { millisecondsToTimestamp } from '../../helpers/convertTimestamp.js';
 export const registerUser = async (_, { input }, context) => {
     const { email, password, role } = input;
     try {
+        //check if already registered
         const users = await context.db.query("Select * from users where email = $1", [email]);
         if (users.rows.length > 0) {
             return {
