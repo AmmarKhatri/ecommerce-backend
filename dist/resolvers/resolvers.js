@@ -1,24 +1,18 @@
 import { addUserInfo } from './user_info/addUserInfo.js';
+import { editUserInfo } from './user_info/editUserInfo.js';
+import { fetchUserPrivateInfo } from './user_info/fetchUserPrivateInfo.js';
+import { fetchUserPublicInfo } from './user_info/fetchUserPublicInfo.js';
 import { loginUser } from './users/loginUser.js';
 import { registerUser } from './users/registerUser.js';
-const books = [
-    {
-        title: 'The Awakening',
-        author: 'Kate Chopin',
-    },
-    {
-        title: 'City of Glass',
-        author: 'Paul Auster',
-    },
-];
 export const resolvers = {
     Query: {
-        //sample query
-        books: () => books,
+        fetchUserPublicInfo,
+        fetchUserPrivateInfo,
     },
     Mutation: {
         registerUser,
         loginUser,
         addUserInfo,
+        editUserInfo,
     }
 };

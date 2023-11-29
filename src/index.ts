@@ -4,6 +4,8 @@ import { typeDefs } from './types/types.js';
 import { resolvers } from './resolvers/resolvers.js';
 import pkg from 'pg';
 const { Pool } = pkg;
+process.env.TZ = 'UTC'; // setting default UTC timezone
+
 
 // Create a PostgreSQL connection pool
 // const pool = new Pool({

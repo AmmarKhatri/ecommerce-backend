@@ -48,6 +48,8 @@ export const addUserInfo = async (_: any, { input }: any, context: any) => {
         'INSERT INTO user_info (id, first_name, last_name, phone_number, date_of_birth, created_at, updated_at, deleted_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);',
         [payload.id, first_name, last_name, phone_number, dob, execTime, execTime, null]
       );
+      // update status of user to onboard
+      await context.db.query('Update users SET onboard = true where id = $1', [payload.id]); 
       return {
         status: 201,
         message: `Info successfully added`,
