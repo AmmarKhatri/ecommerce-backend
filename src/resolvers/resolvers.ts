@@ -1,3 +1,9 @@
+import { addAddress } from './address/addAddress.js';
+import { getAddresses } from './address/getAddresses.js';
+import { removeAddress } from './address/removeAddress.js';
+import { delistProduct } from './products/delistProduct.js';
+import { enlistProduct } from './products/enlistProduct.js';
+import { getEnlistedProducts } from './products/getEnlistedProducts.js';
 import { addUserInfo } from './user_info/addUserInfo.js';
 import { editUserInfo } from './user_info/editUserInfo.js';
 import { fetchUserPrivateInfo } from './user_info/fetchUserPrivateInfo.js';
@@ -9,12 +15,18 @@ export const resolvers = {
   Query: {
     fetchUserPublicInfo,
     fetchUserPrivateInfo,
+    getAddresses,
+    getEnlistedProducts,
   },
   Mutation: {
     registerUser,
     loginUser,
     addUserInfo,
     editUserInfo,
+    addAddress,
+    removeAddress,
+    enlistProduct,
+    delistProduct,
   }
 };
 

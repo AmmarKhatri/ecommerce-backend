@@ -20,18 +20,18 @@ services:
   #   volumes:
   #     - ecom-cache:/data
 
-  backend:
-    build:
-      context: ../ecommerce-backend
-      dockerfile: ./Dockerfile
-    restart: always
-    ports:
-      - "3000:3000"
-    env_file:
-      - ".env"
-    deploy:
-      mode: replicated
-      replicas: 1
+  # backend:
+  #   build:
+  #     context: ../ecommerce-backend
+  #     dockerfile: ./Dockerfile
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - ".env"
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
 
 volumes:
   postgres:

@@ -34,29 +34,28 @@ export const addAddress = async (_: any, { input }: any, context: any) => {
           };
       }
 
-      // add info
+      // add address
       const execTime = millisecondsToTimestamp(Date.now())
       const result = await context.db.query(
-        'INSERT INTO address (user_ref, postal_code, address_line_1, address_line_2, city, created_at, updated_at, deleted_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);',
+        'INSERT INTO address (user_ref, postal_code, address_line_1, address_line_2, city, created_at, updated_at, deleted_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;',
         [payload.id, postal_code, add1, add2, city, execTime, execTime, null]
       );
-      // update status of user to onboard
-      await context.db.query('Update users SET onboard = true where id = $1', [payload.id]); 
       return {
         status: 201,
-        message: `Info successfully added`,
-        private_info: {
-          email: users.rows[0].email,
-          role: users.rows[0].role,
-          onboard: users.rows[0].onboard,
-          first_name,
-          last_name,
-          phone_number,
-          dob
+        message: `Address successfully added`,
+        address: {
+          id: result.rows[0].id,
+          user_ref: payload.id,
+          postal_code,
+          add1,
+          add2,
+          city,
+          created_at: execTime,
+          updated_at: execTime
         },
       };
     } catch (error) {
-      console.error('Error registering user:', error);
+      console.error('Error adding address:', error);
       return {
         status: 500,
         message: 'Internal server error.',

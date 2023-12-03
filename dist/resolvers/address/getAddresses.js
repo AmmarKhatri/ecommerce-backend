@@ -1,7 +1,5 @@
 import { validateToken } from '../../helpers/validateToken.js';
-import { millisecondsToTimestamp } from '../../helpers/convertTimestamp.js';
-export const addAddress = async (_, { input }, context) => {
-    const { postal_code, add1, add2, city } = input;
+export const getAddresses = async (_, __, context) => {
     try {
         // Get the headers from the context
         const { headers } = context.req;
@@ -32,26 +30,17 @@ export const addAddress = async (_, { input }, context) => {
                 message: `User not registered`,
             };
         }
-        // add address
-        const execTime = millisecondsToTimestamp(Date.now());
-        const result = await context.db.query('INSERT INTO address (user_ref, postal_code, address_line_1, address_line_2, city, created_at, updated_at, deleted_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;', [payload.id, postal_code, add1, add2, city, execTime, execTime, null]);
+        // retrieve info
+        const result = await context.db.query('SELECT id, user_ref, postal_code, address_line_1 as add1, address_line_2 as add2, city, created_at, updated_at from address where user_ref = $1 and deleted_at IS NULL;', [payload.id]);
+        const addresses = [...result.rows];
         return {
             status: 201,
-            message: `Address successfully added`,
-            address: {
-                id: result.rows[0].id,
-                user_ref: payload.id,
-                postal_code,
-                add1,
-                add2,
-                city,
-                created_at: execTime,
-                updated_at: execTime
-            },
+            message: `Addresses fetched successfully`,
+            addresses: addresses
         };
     }
     catch (error) {
-        console.error('Error adding address:', error);
+        console.error('Error fetching addresses:', error);
         return {
             status: 500,
             message: 'Internal server error.',
