@@ -1,6 +1,7 @@
 import { addAddress } from './address/addAddress.js';
 import { getAddresses } from './address/getAddresses.js';
 import { removeAddress } from './address/removeAddress.js';
+import { changeInventory } from './inventory/changeInventory.js';
 import { delistProduct } from './products/delistProduct.js';
 import { enlistProduct } from './products/enlistProduct.js';
 import { getEnlistedProducts } from './products/getEnlistedProducts.js';
@@ -26,5 +27,6 @@ export const resolvers = {
         removeAddress,
         enlistProduct,
         delistProduct,
+        changeInventory,
     }
 };

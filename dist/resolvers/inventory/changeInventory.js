@@ -1,5 +1,6 @@
 import { validateToken } from '../../helpers/validateToken.js';
-export const getEnlistedProducts = async (_, __, context) => {
+export const changeInventory = async (_, { input }, context) => {
+    const { product_id, quantity } = input;
     try {
         // Get the headers from the context
         const { headers } = context.req;
@@ -22,24 +23,22 @@ export const getEnlistedProducts = async (_, __, context) => {
                 message: 'Invalid token',
             };
         }
-        if (payload.role !== 'seller') {
+        const sellerId = await context.db.query('SELECT p.seller_id from products p join product_inventory pi on p.id = pi.product_id where pi.product_id = $1;', [product_id]);
+        if (payload.role !== 'seller' || sellerId.rows[0].seller_id !== payload.id) {
             return {
                 status: 409,
-                message: `Only seller can view inventory`,
+                message: `Unauthorizaed: Cannot change inventory`,
             };
         }
-        // query the user
-        const products = await context.db.query("Select * from products p join product_inventory pi on p.id = pi.product_id where p.seller_id = $1 and p.deleted_at is null;", [payload.id]);
-        // check if info already input
-        const resProducts = [...products.rows];
+        // update inventory
+        await context.db.query('UPDATE product_inventory SET quantity = $1 where product_id = $2', [quantity, product_id]);
         return {
-            status: 200,
-            message: `Products successfully fetched`,
-            products: resProducts,
+            status: 201,
+            message: `Successfully updated inventory`,
         };
     }
     catch (error) {
-        console.error('Error enlisting product:', error);
+        console.error('Error updating inventory:', error);
         return {
             status: 500,
             message: 'Internal server error.',
