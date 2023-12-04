@@ -2,6 +2,8 @@ import { addAddress } from './address/addAddress.js';
 import { getAddresses } from './address/getAddresses.js';
 import { removeAddress } from './address/removeAddress.js';
 import { changeInventory } from './inventory/changeInventory.js';
+import { fetchOrderByBuyer } from './orders/fetchOrderByBuyer.js';
+import { placeOrder } from './orders/placeOrder.js';
 import { delistProduct } from './products/delistProduct.js';
 import { enlistProduct } from './products/enlistProduct.js';
 import { getEnlistedProducts } from './products/getEnlistedProducts.js';
@@ -17,6 +19,7 @@ export const resolvers = {
         fetchUserPrivateInfo,
         getAddresses,
         getEnlistedProducts,
+        fetchOrderByBuyer,
     },
     Mutation: {
         registerUser,
@@ -28,5 +31,6 @@ export const resolvers = {
         enlistProduct,
         delistProduct,
         changeInventory,
+        placeOrder,
     }
 };
