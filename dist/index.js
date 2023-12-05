@@ -49,7 +49,7 @@ try {
     //  2. installs your ApolloServer instance as middleware
     //  3. prepares your app to handle incoming requests
     const { url } = await startStandaloneServer(server, {
-        listen: { port: parseInt(process.env.PORT) || 3000 },
+        listen: { port: parseInt(process.env.PORT) || 5000 },
         async context({ req, res }) {
             return {
                 db: dbClient,
