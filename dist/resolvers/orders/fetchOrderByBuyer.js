@@ -29,9 +29,9 @@ export const fetchOrderByBuyer = async (_, { input }, context) => {
                 message: `Unauthorizaed: Cannot make a purchase. Not a buyer`,
             };
         }
-        const baseInfo = context.db.query(`SELECT * from order_total where id = $1;`, [id]);
+        const baseInfo = await context.db.query(`SELECT * from order_total where id = $1;`, [id]);
         console.log(baseInfo.rows[0]);
-        const itemList = context.db.query(`SELECT p.id as prod_id,oi.id as item_id, p.image_url, p.name, p.description,oi.quantity, price,first_name, last_name, phone_number from order_items oi
+        const itemList = await context.db.query(`SELECT p.id as prod_id,oi.id as item_id, p.image_url, p.name, p.description,oi.quantity, price,first_name, last_name, phone_number from order_items oi
             join order_total ot on oi.order_reference = ot.id
             join products p on oi.product_id = p.id
             join user_info ui on p.seller_id = ui.id
@@ -39,6 +39,7 @@ export const fetchOrderByBuyer = async (_, { input }, context) => {
         console.log(itemList.rows);
         let order = baseInfo.rows[0];
         order.items = itemList.rows;
+        order.created_at = order.created_at.toISOString();
         return {
             status: 201,
             message: `Successfully fetched order`,
@@ -46,7 +47,7 @@ export const fetchOrderByBuyer = async (_, { input }, context) => {
         };
     }
     catch (error) {
-        console.error('Error updating inventory:', error);
+        console.error('Error fetching order info:', error);
         return {
             status: 500,
             message: 'Internal server error.',

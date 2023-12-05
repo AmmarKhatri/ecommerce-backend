@@ -25,7 +25,7 @@ export const orders = `#graphql
         phone_number: String!
     }
     type Order {
-        order_id: Int!
+        id: Int!
         total: Float!
         buyer_id: Int!
         items: [OrderItem!]!
