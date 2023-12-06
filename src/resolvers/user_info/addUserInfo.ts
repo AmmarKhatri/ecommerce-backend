@@ -52,7 +52,7 @@ export const addUserInfo = async (_: any, { input }: any, context: any) => {
       await context.db.query('Update users SET onboard = true where id = $1', [payload.id]); 
       return {
         status: 201,
-        message: `Info successfully added`,
+        message: `User Info successfully added`,
         private_info: {
           email: users.rows[0].email,
           role: users.rows[0].role,

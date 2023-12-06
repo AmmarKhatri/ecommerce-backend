@@ -2,7 +2,12 @@ import bcrypt from 'bcrypt';
 import { millisecondsToTimestamp } from '../../helpers/convertTimestamp.js';
 export const registerUser = async (_: any, { input }: any, context: any) => {
     const { email, password, role } = input;
-  
+    if (email == "" || password == ""){
+      return {
+        status: 404,
+        message: `Fill empty fields`,
+      };
+    }
     try {
       //check if already registered
       const users = await context.db.query(

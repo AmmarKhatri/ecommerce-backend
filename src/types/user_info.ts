@@ -47,9 +47,14 @@ export const user_info = `#graphql
         phone_number: String
         dob: String
     }
+    type isOnboardedResponse {
+        status: Int!
+        message: String!
+    }
     type Query {
         fetchUserPublicInfo(input: FetchUserPublicInfo): FetchUserPublicInfoResponse!
         fetchUserPrivateInfo: FetchUserPrivateInfoResponse!
+        isOnboarded: isOnboardedResponse!
         
     }
     extend type Mutation {

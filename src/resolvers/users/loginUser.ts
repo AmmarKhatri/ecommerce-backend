@@ -2,6 +2,12 @@ import bcrypt from 'bcrypt';
 import { generateToken } from '../../helpers/generateToken.js';
 export const loginUser = async (_: any, { input }: any, context: any) => {
     const { email, password } = input;
+    if (email == "" || password == ""){
+      return {
+        status: 404,
+        message: `Fill empty fields`,
+      };
+    }
     try {
       const users = await context.db.query(
         "Select * from users where email = $1", 
