@@ -37,9 +37,17 @@ export const products = `#graphql
         message: String!
         products: [Product!]
     }
+    # fetching trending products
+    type TrendingLatestProducts {
+        status: Int!
+        message: String!
+        trending: [Product!]
+        latest: [Product!]
+    }
     extend type Query{
         # different category products return
         getEnlistedProducts: GetEnlistedProductsResponse!
+        fetchProducts: TrendingLatestProducts!
     }
     extend type Mutation {
         enlistProduct(input: EnlistProduct): EnlistProductResponse!

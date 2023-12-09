@@ -1,5 +1,4 @@
 import { validateToken } from '../../helpers/validateToken.js';
-import { millisecondsToTimestamp } from '../../helpers/convertTimestamp.js';
 export const getEnlistedProducts = async (_: any, __: any, context: any) => {
     try {
       // Get the headers from the context

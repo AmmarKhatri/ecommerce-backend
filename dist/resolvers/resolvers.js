@@ -6,6 +6,7 @@ import { fetchOrderByBuyer } from './orders/fetchOrderByBuyer.js';
 import { placeOrder } from './orders/placeOrder.js';
 import { delistProduct } from './products/delistProduct.js';
 import { enlistProduct } from './products/enlistProduct.js';
+import { fetchProducts } from './products/fetchProducts.js';
 import { getEnlistedProducts } from './products/getEnlistedProducts.js';
 import { addUserInfo } from './user_info/addUserInfo.js';
 import { editUserInfo } from './user_info/editUserInfo.js';
@@ -22,6 +23,7 @@ export const resolvers = {
         getAddresses,
         getEnlistedProducts,
         fetchOrderByBuyer,
+        fetchProducts,
     },
     Mutation: {
         registerUser,
