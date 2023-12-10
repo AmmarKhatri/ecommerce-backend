@@ -12,6 +12,7 @@ import { enlistProduct } from './products/enlistProduct.js';
 import { fetchProducts } from './products/fetchProducts.js';
 import { getEnlistedProducts } from './products/getEnlistedProducts.js';
 import { searchProducts } from './products/searchProduct.js';
+import { giveRating } from './rating/giveRating.js';
 import { addUserInfo } from './user_info/addUserInfo.js';
 import { editUserInfo } from './user_info/editUserInfo.js';
 import { fetchUserPrivateInfo } from './user_info/fetchUserPrivateInfo.js';
@@ -44,5 +45,6 @@ export const resolvers = {
         changeInventory,
         placeOrder,
         handleOrder,
+        giveRating,
     }
 };

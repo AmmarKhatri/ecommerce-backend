@@ -1,6 +1,6 @@
 import { validateToken } from '../../helpers/validateToken.js';
 export const placeOrder = async (_: any, { input }: any, context: any) => {
-    const { cart } = input;
+    const { address,cart } = input;
     try {
       // Get the headers from the context
       const { headers } = context.req;
@@ -30,8 +30,8 @@ export const placeOrder = async (_: any, { input }: any, context: any) => {
       }
      // Perform create order and retrieve the total
       const orderTotalResult = await context.db.query({
-        text: 'SELECT create_order($1, $2) AS order_total_id',
-        values: [payload.id, cart],
+        text: 'SELECT create_order($1, $2, $3) AS order_total_id',
+        values: [payload.id, address, cart],
       });
       const orderTotalId = orderTotalResult.rows[0].order_total_id;
       return {

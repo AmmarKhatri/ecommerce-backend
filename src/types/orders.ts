@@ -1,6 +1,7 @@
 export const orders = `#graphql
     #place an order
     input PlaceOrder {
+        address: Int!
         cart: [[Int]!]!
     }
     type PlaceOrderResponse {
@@ -44,6 +45,7 @@ export const orders = `#graphql
         product_id: Int!
         name: String!
         quantity: Int!
+        address: String!
         status: String!
         order_reference: Int!
         price: Float!
@@ -63,6 +65,7 @@ export const orders = `#graphql
         name: String!
         buyer_name: String!
         quantity: Int!
+        address: String!
         status: String!
         order_reference: Int!
         price: Float!

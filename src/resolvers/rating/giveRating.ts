@@ -1,6 +1,7 @@
 import { validateToken } from '../../helpers/validateToken.js';
-export const fetchOrderItemsForBuyer = async (_: any, { input }: any, context: any) => {
-    const { status } = input;
+import { millisecondsToTimestamp } from '../../helpers/convertTimestamp.js';
+export const giveRating = async (_: any, { input }: any, context: any) => {
+    const { order_id,product_id, rating, comment } = input;
     try {
       // Get the headers from the context
       const { headers } = context.req;
@@ -25,22 +26,24 @@ export const fetchOrderItemsForBuyer = async (_: any, { input }: any, context: a
       if (payload.role !== 'buyer' ){
         return {
           status: 409,
-          message: `Unauthorized: Not a buyer`,
+          message: `Unauthorized: Cannot rate. Not a buyer`,
         };
       }
-      const itemList = await context.db.query(
-        `Select oi.*, p.price, p.name, p.image_url, a.postal_code||', '|| a.address_line_1 ||' '|| a.address_line_2 ||', '|| a.city as address from order_total ot
-        join order_items oi on ot.id = oi.order_reference
-        join address a on a.id = ot.address
-        join products p on p.id = oi.product_id
-        where oi.status = $1 and ot.buyer_id = $2;`, [status, payload.id])
+      // create a review
+      const execTime = millisecondsToTimestamp(Date.now())
+      await context.db.query(
+        "Insert into ratings (order_item_id, product_id, rating, comment, created_at)values ($1, $2, $3, $4, $5);", 
+      [order_id, product_id,rating, comment, execTime])
+      //update status to reviewed
+      await context.db.query(
+        "UPDATE order_items SET status = 'reviewed' where id = $1;", 
+      [order_id])
       return {
-        status: 200,
-        message: `Fetched orders`,
-        orders: itemList.rows
+        status: 201,
+        message: `Order Reviewed Successfully`,
       };
     } catch (error) {
-      console.error('Error fetching order info:', error);
+      console.error('Error creating review:', error);
       return {
         status: 500,
         message: 'Internal server error.',
