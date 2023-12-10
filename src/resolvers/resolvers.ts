@@ -3,6 +3,9 @@ import { getAddresses } from './address/getAddresses.js';
 import { removeAddress } from './address/removeAddress.js';
 import { changeInventory } from './inventory/changeInventory.js';
 import { fetchOrderByBuyer } from './orders/fetchOrderByBuyer.js';
+import { fetchOrderItemsForBuyer } from './orders/fetchOrderItemsForBuyer.js';
+import { fetchOrderItemsForSeller } from './orders/fetchOrderItemsForSeller.js';
+import { handleOrder } from './orders/handleOrder.js';
 import { placeOrder } from './orders/placeOrder.js';
 import { delistProduct } from './products/delistProduct.js';
 import { enlistProduct } from './products/enlistProduct.js';
@@ -27,6 +30,8 @@ export const resolvers = {
     fetchOrderByBuyer,
     fetchProducts,
     searchProducts,
+    fetchOrderItemsForBuyer,
+    fetchOrderItemsForSeller,
   },
   Mutation: {
     registerUser,
@@ -39,6 +44,7 @@ export const resolvers = {
     delistProduct,
     changeInventory,
     placeOrder,
+    handleOrder,
   }
 };
 

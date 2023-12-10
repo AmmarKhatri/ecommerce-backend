@@ -7,7 +7,7 @@ export const products = `#graphql
         description: String!
         image_url: String!
         price: Float!
-        quantity: String!
+        quantity: Int!
         created_at: String!
         updated_at: String!
     }
@@ -31,7 +31,7 @@ export const products = `#graphql
         status: Int!
         message: String!
     }
-    #get addresses list
+    #get products list
     type GetEnlistedProductsResponse {
         status: Int!
         message: String!
