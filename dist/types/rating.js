@@ -12,4 +12,5 @@ export const ratings = `#graphql
     extend type Mutation {
         giveRating(input: GiveRating): GiveRatingResponse!
     }
+    
 `;

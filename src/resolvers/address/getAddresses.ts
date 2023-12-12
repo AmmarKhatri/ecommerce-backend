@@ -38,6 +38,9 @@ export const getAddresses = async (_: any, __: any, context: any) => {
         [payload.id]
       );
       const addresses = [...result.rows];
+      for(let i = 0; i < addresses.length; i++){
+        addresses[i].created_at = addresses[i].created_at.toISOString()
+      }
       return {
         status: 201,
         message: `Addresses fetched successfully`,

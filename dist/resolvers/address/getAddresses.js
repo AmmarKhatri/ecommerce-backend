@@ -33,6 +33,9 @@ export const getAddresses = async (_, __, context) => {
         // retrieve info
         const result = await context.db.query('SELECT id, user_ref, postal_code, address_line_1 as add1, address_line_2 as add2, city, created_at, updated_at from address where user_ref = $1 and deleted_at IS NULL;', [payload.id]);
         const addresses = [...result.rows];
+        for (let i = 0; i < addresses.length; i++) {
+            addresses[i].created_at = addresses[i].created_at.toISOString();
+        }
         return {
             status: 201,
             message: `Addresses fetched successfully`,
