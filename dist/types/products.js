@@ -52,11 +52,39 @@ export const products = `#graphql
         message: String!
         products: [Product!]
     }
+    type PageProduct {
+        id: Int!
+        image_url: String!
+        name: String!
+        description: String!
+        price: Float!
+        quantity: Int!
+        seller_id: Int!
+        seller_name: String!
+        average_rating: Float!
+        count: Int!
+    }
+    type CustomerReviews {
+        id: Int!
+        rating: Int!
+        comment: String
+        buyer_name: String!
+    }
+    input GetProduct {
+        id: Int!
+    }
+    type GetProductResponse {
+        message: String!
+        status: Int!
+        product: PageProduct
+        reviews: [CustomerReviews!]
+    }
     extend type Query{
         # different category products return
         getEnlistedProducts: GetEnlistedProductsResponse!
         fetchProducts: TrendingLatestProducts!
         searchProducts(input: SearchProduct): SearchProductResponse!
+        getProduct(input: GetProduct): GetProductResponse!
     }
     extend type Mutation {
         enlistProduct(input: EnlistProduct): EnlistProductResponse!

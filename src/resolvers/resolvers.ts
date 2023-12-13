@@ -11,6 +11,7 @@ import { delistProduct } from './products/delistProduct.js';
 import { enlistProduct } from './products/enlistProduct.js';
 import { fetchProducts } from './products/fetchProducts.js';
 import { getEnlistedProducts } from './products/getEnlistedProducts.js';
+import { getProduct } from './products/getProduct.js';
 import { searchProducts } from './products/searchProduct.js';
 import { giveRating } from './rating/giveRating.js';
 import { addUserInfo } from './user_info/addUserInfo.js';
@@ -33,6 +34,7 @@ export const resolvers = {
     searchProducts,
     fetchOrderItemsForBuyer,
     fetchOrderItemsForSeller,
+    getProduct,
   },
   Mutation: {
     registerUser,
